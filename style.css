@@ -1,33 +1,47 @@
+html, button {
+  color: #fff;
+}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: #121212;
 }
 body > .library {
   margin-top: 20px;
 }
 .library {
   display: flex;
-  width: 800px;
+  width: 1200px;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   flex-wrap: wrap;
 }
 .library > div {
   display: grid;
-  grid-template-rows: repeat(5, 20%);
-  grid-template-columns: 30% 70%;
+  grid-template-rows: repeat(5, minmax(30px, max-content));
+  grid-template-columns: 1fr 2fr;
   width: 200px;
-  height: 200px;
+  min-height: min-content;
+  background-color: rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 20px 20px;
+  margin: 20px;
+  gap: 5px;
 }
 
 .library > div > div {
-  margin: auto;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background-color: #606060;
 }
 
 .library > div > div:nth-child(1) {
   grid-area: 1 / 1 / 2 / 2;
+  border-radius: 20px 0 0 0;
 }
 
 .library > div > div:nth-child(2) {
@@ -42,9 +56,39 @@ body > .library {
   grid-area: 4 / 1 / 5 / 2;
 }
 
-.library button {
+.library > div > div:nth-child(5) {
+  border-radius: 0 20px 0 0;
+}
+
+.library > div > div:nth-child(9) {
   grid-area: 5 / 1 / 6 / 3;
-  width: 80%;
-  height: 80%;
-  margin: auto;
+  border-radius: 0 0 20px 20px;
+}
+
+.library > div > div:nth-child(5) > p,
+.library > div > div:nth-child(6) > p,
+.library > div > div:nth-child(7) > p,
+.library > div > div:nth-child(8) > p {
+  padding: 10px;
+}
+
+button {
+  background-color: #388e3c;
+  height: 40px;
+  width: 100px;
+  border-radius: 10px;
+}
+
+.library button {
+  width: 140px;
+  height: 30px;
+  margin: 5px;
+  background-color: #d32f2f;
+  border-radius: 10px;
+}
+
+p {
+  margin: 0;
+  word-break: break-word;
+  text-align: center;
 }
