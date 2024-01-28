@@ -1,6 +1,8 @@
 const myLibrary = [];
 const lib = document.querySelector(".library");
 const startBtn = document.querySelector(".start");
+const dialog = document.querySelector("dialog");
+const endBtn = document.querySelector(`dialog input[type="submit"]`)
 
 
 function Book(title, author, pages, read) {
@@ -15,7 +17,11 @@ function Book(title, author, pages, read) {
 }
 
 function addToLibrary() {
-  let newBook = prompt("Title, author, pages, read").split(", ");
+  let newBook = [];
+  newBook.push(dialog.querySelector("div:nth-child(1) input").value);
+  newBook.push(dialog.querySelector("div:nth-child(2) input").value);
+  newBook.push(dialog.querySelector("div:nth-child(3) input").value);
+  newBook.push(dialog.querySelector("div:nth-child(4) input").checked);
   myLibrary.push(new Book(...newBook));
   addVisual(true);
 }
@@ -33,10 +39,17 @@ function addVisual(add) {
     myLibrary[text].number = `Book${text}`;
     divs.className = `Book${text}`;
     let rmbtn = document.createElement("button");
+    let readCheck = document.createElement("input");
+    readCheck.type = "checkbox";
     rmbtn.innerText = "Remove";
     for (i=1; i <= 8; i++) {
       divs.appendChild(document.createElement("div"));
-      divs.querySelector(`div:nth-child(${i})`).appendChild(document.createElement("p"));
+      if (i < 8)  {
+        divs.querySelector(`div:nth-child(${i})`).appendChild(document.createElement("p"));
+      }
+      else {
+        readCheck.checked = myLibrary[text].read;
+      }
     }
     divs.querySelector("div:nth-child(1) > p").innerText = `Title:`;
     divs.querySelector("div:nth-child(2) > p").innerText = `Author:`;
@@ -45,11 +58,12 @@ function addVisual(add) {
     divs.querySelector("div:nth-child(5) > p").innerText = `${myLibrary[text].title}`;
     divs.querySelector("div:nth-child(6) > p").innerText = `${myLibrary[text].author}`;
     divs.querySelector("div:nth-child(7) > p").innerText = `${myLibrary[text].pages}`;
-    divs.querySelector("div:nth-child(8) > p").innerText = `${myLibrary[text].read}`;
+    divs.querySelector("div:nth-child(8)").appendChild(readCheck);
     divs.appendChild(document.createElement("div"));
     divs.querySelector("div:nth-child(9)").appendChild(rmbtn);
     lib.appendChild(divs);
     removeBook(divs, rmbtn);
+    updValues(divs);
   }
 }
 
@@ -60,6 +74,30 @@ function removeBook(divs, rmbtn){
   });
 }
 
+function updValues(divs) {
+  divs.querySelector("div:nth-child(5) p").addEventListener("click", (item) => {
+    item.target.innerText = prompt();
+    myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].title = item.target.innerText;
+  });
+  divs.querySelector("div:nth-child(6) p").addEventListener("click", (item) => {
+    item.target.innerText = prompt();
+    myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].author = item.target.innerText;
+  });
+  divs.querySelector("div:nth-child(7) p").addEventListener("click", (item) => {
+    item.target.innerText = prompt();
+    myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].pages = item.target.innerText;
+  });
+  divs.querySelector("div:nth-child(8) input").addEventListener("click", (item) => {
+    myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].read = item.target.checked;
+  });
+}
+
 startBtn.addEventListener("click", () => {
+  dialog.showModal();
+})
+
+endBtn.addEventListener("click", (event) => {
+  event.preventDefault();
   addToLibrary();
+  dialog.close();
 })
