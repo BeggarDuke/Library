@@ -92,3 +92,43 @@ p {
   word-break: break-word;
   text-align: center;
 }
+
+dialog {
+  width: 200px;
+  height: max-content;
+  background-color: #606060;
+  border-radius: 20px;
+}
+
+.data {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.data div {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px 0;
+}
+.data input {
+  margin: 2px 0;
+}
+.data div input[type="checkbox"], .data div label[for="read"] {
+  width: auto;
+}
+.data div label[for="read"] {
+  margin-right: 5px;
+}
+.data div input[type="checkbox"] {
+  width: 20px;
+  height: 100%;
+  margin: 0;
+}
+.data div * {
+  width: 100%;
+}
+.data div:last-child input {
+  width: 30%;
+  margin: auto;
+}
