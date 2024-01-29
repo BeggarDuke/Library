@@ -2,7 +2,8 @@ const myLibrary = [];
 const lib = document.querySelector(".library");
 const startBtn = document.querySelector(".start");
 const dialog = document.querySelector("dialog");
-const endBtn = document.querySelector(`dialog input[type="submit"]`)
+const endBtn = document.querySelector(`dialog input[type="submit"]`);
+const cancelBtn = document.querySelector(`dialog input[type="submit"]:last-child`);
 
 
 function Book(title, author, pages, read) {
@@ -102,5 +103,10 @@ startBtn.addEventListener("click", () => {
 endBtn.addEventListener("click", (event) => {
   event.preventDefault();
   addToLibrary();
+  dialog.close();
+})
+
+cancelBtn.addEventListener("click", (event) => {
+  event.preventDefault();
   dialog.close();
 })

@@ -1,5 +1,13 @@
-html, button {
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+html, button, input {
   color: #fff;
+  font-family: 'Roboto', sans-serif;
+  /* font-size: ; */
+}
+
+input[type="text"] {
+  color: black;
 }
 
 body {
@@ -25,7 +33,7 @@ body > .library {
   grid-template-columns: 1fr 2fr;
   width: 200px;
   min-height: min-content;
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: #262626;
   border-radius: 20px;
   padding: 20px 20px;
   margin: 20px;
@@ -36,7 +44,7 @@ body > .library {
   display: grid;
   justify-content: center;
   align-items: center;
-  background-color: #606060;
+  background-color: #434343;
 }
 
 .library > div > div:nth-child(1) {
@@ -77,6 +85,7 @@ button {
   height: 40px;
   width: 100px;
   border-radius: 10px;
+  font-size: 90%;
 }
 
 .library button {
@@ -96,8 +105,10 @@ p {
 dialog {
   width: 200px;
   height: max-content;
-  background-color: #606060;
+  background-color: #434343;
   border-radius: 20px;
+  color: #fff;
+  border-color: black;
 }
 
 .data {
@@ -131,4 +142,6 @@ dialog {
 .data div:last-child input {
   width: 30%;
   margin: auto;
+  background-color: #388e3c;
+  border-radius: 10px;
 }
