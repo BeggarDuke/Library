@@ -88,10 +88,7 @@ function updValues(divs) {
       item.stopImmediatePropagation();
     });
   }
-  divs.querySelector("div:nth-child(8) input[type=checkbox]").addEventListener("click", (event) => {
-    //
-    // There is some bug, library not always takes right property from checkbox
-    //
+  divs.querySelector("div:nth-child(8) input[type=checkbox]").addEventListener("change", (event) => {
     myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].read = event.target.checked;
   });
 }
