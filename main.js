@@ -75,23 +75,23 @@ function removeBook(divs, rmbtn){
 }
 
 function updValues(divs) {
-  divs.querySelector("div:nth-child(5)").addEventListener("click", (item) => {
-    item.target.lastChild.innerText = prompt();
-    myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].title = item.target.innerText;
-  });
-  divs.querySelector("div:nth-child(6)").addEventListener("click", (item) => {
-    item.target.lastChild.innerText = prompt();
-    myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].author = item.target.innerText;
-  });
-  divs.querySelector("div:nth-child(7)").addEventListener("click", (item) => {
-    item.target.lastChild.innerText = prompt();
-    myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].pages = item.target.innerText;
-  });
-  divs.querySelector("div:nth-child(8) input[type=checkbox]").addEventListener("click", (item) => {
+  for (i=5; i<8; i++) {
+    divs.querySelector(`div:nth-child(${i}) p`).addEventListener("click", (item) => {
+      item.target.innerText = prompt();
+      myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].title = item.target.innerText;
+      item.stopImmediatePropagation();
+    });
+    divs.querySelector(`div:nth-child(${i})`).addEventListener("click", (item) => {
+      item.target.lastChild.innerText = prompt();
+      myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].title = item.target.lastChild.innerText;
+      item.stopImmediatePropagation();
+    });
+  }
+  divs.querySelector("div:nth-child(8) input[type=checkbox]").addEventListener("click", (event) => {
     //
-    // There is some bug, library not always takes right property
+    // There is some bug, library not always takes right property from checkbox
     //
-    myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].read = item.target.checked;
+    myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].read = event.target.checked;
   });
 }
 
