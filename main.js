@@ -6,10 +6,11 @@ const endBtn = document.querySelector(`dialog input[type="submit"]`);
 const cancelBtn = document.querySelector(`dialog input[type="submit"]:last-child`);
 
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, tags, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
+  this.tags = tags;
   this.read = read;
   this.info = function() {
     return `${this.title}, ${this.author}, ${this.pages}, ${this.read}.`;
@@ -22,7 +23,10 @@ function addToLibrary() {
   newBook.push(dialog.querySelector("div:nth-child(1) input").value);
   newBook.push(dialog.querySelector("div:nth-child(2) input").value);
   newBook.push(dialog.querySelector("div:nth-child(3) input").value);
-  newBook.push(dialog.querySelector("div:nth-child(4) input").checked);
+  newBook.push(dialog.querySelector("div:nth-child(4) input").value);
+  newBook[3] = newBook[3].split(",");
+  newBook[3] = newBook[3].map(element => element.trim());
+  newBook.push(dialog.querySelector("div:nth-child(5) input").checked);
   myLibrary.push(new Book(...newBook));
   addVisual(true);
 }
@@ -43,9 +47,10 @@ function addVisual(add) {
     divs.className = `Book${text}`;
     rmbtn.innerText = "Remove";
     readCheck.type = "checkbox";
-    for (i=1; i <= 8; i++) {
+    readCheck.id = "read";
+    for (i=1; i <= 11; i++) {
       divs.appendChild(document.createElement("div"));
-      if (i < 8)  {
+      if (i < 10)  {
         divs.querySelector(`div:nth-child(${i})`).appendChild(document.createElement("p"));
       }
       else {
@@ -55,13 +60,15 @@ function addVisual(add) {
     divs.querySelector("div:nth-child(1) > p").innerText = `Title:`;
     divs.querySelector("div:nth-child(2) > p").innerText = `Author:`;
     divs.querySelector("div:nth-child(3) > p").innerText = `Pages:`;
-    divs.querySelector("div:nth-child(4) > p").innerText = `Read:`;
-    divs.querySelector("div:nth-child(5) > p").innerText = `${myLibrary[text].title}`;
-    divs.querySelector("div:nth-child(6) > p").innerText = `${myLibrary[text].author}`;
-    divs.querySelector("div:nth-child(7) > p").innerText = `${myLibrary[text].pages}`;
-    divs.querySelector("div:nth-child(8)").appendChild(readCheck);
+    divs.querySelector("div:nth-child(4) > p").innerText = `Tags:`;
+    divs.querySelector("div:nth-child(5) > p").innerText = `Read:`;
+    divs.querySelector("div:nth-child(6) > p").innerText = `${myLibrary[text].title}`;
+    divs.querySelector("div:nth-child(7) > p").innerText = `${myLibrary[text].author}`;
+    divs.querySelector("div:nth-child(8) > p").innerText = `${myLibrary[text].pages}`;
+    divs.querySelector("div:nth-child(9) > p").innerText = `${myLibrary[text].tags}`;
+    divs.querySelector("div:nth-child(10)").appendChild(readCheck);
     divs.appendChild(document.createElement("div"));
-    divs.querySelector("div:nth-child(9)").appendChild(rmbtn);
+    divs.querySelector("div:nth-child(11)").appendChild(rmbtn);
     lib.appendChild(divs);
     removeBook(divs, rmbtn);
     updValues(divs);
@@ -76,19 +83,53 @@ function removeBook(divs, rmbtn){
 }
 
 function updValues(divs) {
-  for (i=5; i<8; i++) {
-    divs.querySelector(`div:nth-child(${i}) p`).addEventListener("click", (item) => {
-      item.target.innerText = prompt();
-      myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].title = item.target.innerText;
-      item.stopImmediatePropagation();
-    });
-    divs.querySelector(`div:nth-child(${i})`).addEventListener("click", (item) => {
-      item.target.lastChild.innerText = prompt();
-      myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].title = item.target.lastChild.innerText;
-      item.stopImmediatePropagation();
-    });
-  }
-  divs.querySelector("div:nth-child(8) input[type=checkbox]").addEventListener("change", (event) => {
+  divs.querySelector("div:nth-child(6)").addEventListener("click", (item) => {
+    item.target.lastChild.innerText = prompt();
+    myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].title = item.target.innerText;
+    item.stopImmediatePropagation();
+  });
+  divs.querySelector("div:nth-child(6) p").addEventListener("click", (item) => {
+    item.target.innerText = prompt();
+    myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].title = item.target.innerText;
+    item.stopImmediatePropagation();
+  });
+
+  divs.querySelector("div:nth-child(7)").addEventListener("click", (item) => {
+    item.target.lastChild.innerText = prompt();
+    myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].author = item.target.innerText;
+    item.stopImmediatePropagation();
+  });
+  divs.querySelector("div:nth-child(7) p").addEventListener("click", (item) => {
+    item.target.innerText = prompt();
+    myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].author = item.target.innerText;
+    item.stopImmediatePropagation();
+  });
+
+  divs.querySelector("div:nth-child(8)").addEventListener("click", (item) => {
+    item.target.lastChild.innerText = prompt();
+    myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].pages = item.target.innerText;
+    item.stopImmediatePropagation();
+  });
+  divs.querySelector("div:nth-child(8) p").addEventListener("click", (item) => {
+    item.target.innerText = prompt();
+    myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].pages = item.target.innerText;
+    item.stopImmediatePropagation();
+  });
+
+  divs.querySelector("div:nth-child(9)").addEventListener("click", (item) => {
+    const arr = myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].tags;
+    myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].tags = prompt("", arr).split(",").map((item) => item.trim());
+    item.target.lastChild.innerText = myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].tags;
+    item.stopImmediatePropagation();
+  });
+  divs.querySelector("div:nth-child(9) p").addEventListener("click", (item) => {
+    const arr = myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].tags;
+    myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].tags = prompt("", arr).split(",").map((item) => item.trim());
+    item.target.innerText = myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].tags;
+    item.stopImmediatePropagation();
+  });
+
+  divs.querySelector("div:nth-child(10) input[type=checkbox]").addEventListener("change", (event) => {
     myLibrary[myLibrary.findIndex((item) => item.number === divs.className)].read = event.target.checked;
   });
 }
