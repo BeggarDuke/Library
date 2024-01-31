@@ -131,7 +131,7 @@ dialog {
 .data div label[for="read"] {
   margin-right: 5px;
 }
-input[type="checkbox"] {
+.data div input[type="checkbox"], input[type="checkbox"] {
   width: 20px;
   height: 100%;
   margin: 0;
