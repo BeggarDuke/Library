@@ -37,12 +37,12 @@ function addVisual(add) {
   for (i=0; i < set; i++) {
     let text = !add ? i : myLibrary.length-1;
     let divs = document.createElement("div");
-    myLibrary[text].number = `Book${text}`;
-    divs.className = `Book${text}`;
     let rmbtn = document.createElement("button");
     let readCheck = document.createElement("input");
-    readCheck.type = "checkbox";
+    myLibrary[text].number = `Book${text}`;
+    divs.className = `Book${text}`;
     rmbtn.innerText = "Remove";
+    readCheck.type = "checkbox";
     for (i=1; i <= 8; i++) {
       divs.appendChild(document.createElement("div"));
       if (i < 8)  {
@@ -95,17 +95,17 @@ function updValues(divs) {
 
 startBtn.addEventListener("click", () => {
   dialog.showModal();
-})
+});
 
 endBtn.addEventListener("click", (event) => {
   event.preventDefault();
   addToLibrary();
   dialog.querySelector("form").reset();
   dialog.close();
-})
+});
 
 cancelBtn.addEventListener("click", (event) => {
   event.preventDefault();
   dialog.querySelector("form").reset();
   dialog.close();
-})
+});
