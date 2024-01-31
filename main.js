@@ -100,10 +100,12 @@ startBtn.addEventListener("click", () => {
 endBtn.addEventListener("click", (event) => {
   event.preventDefault();
   addToLibrary();
+  dialog.querySelector("form").reset();
   dialog.close();
 })
 
 cancelBtn.addEventListener("click", (event) => {
   event.preventDefault();
+  dialog.querySelector("form").reset();
   dialog.close();
 })
