@@ -15,7 +15,7 @@ class Book {
     this.tags = tags;
     this.read = read;
   }
-  info = () => {
+  info() {
     return `${this.title}, ${this.author}, ${this.pages}, ${this.read}.`;
   }
 }
