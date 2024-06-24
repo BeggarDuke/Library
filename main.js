@@ -6,16 +6,18 @@ const endBtn = document.querySelector(`dialog input[type="submit"]`);
 const cancelBtn = document.querySelector(`dialog input[type="submit"]:last-child`);
 
 
-function Book(title, author, pages, tags, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.tags = tags;
-  this.read = read;
-  this.info = function() {
+class Book {
+  number = undefined;
+  constructor(title, author, pages, tags, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.tags = tags;
+    this.read = read;
+  }
+  info = () => {
     return `${this.title}, ${this.author}, ${this.pages}, ${this.read}.`;
   }
-  this.number = undefined;
 }
 
 function addToLibrary() {
